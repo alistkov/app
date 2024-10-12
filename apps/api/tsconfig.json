@@ -1,0 +1,9 @@
+{
+  "extends": ["@repo/typescript-config/server.json", "fastify-tsconfig"],
+  "compilerOptions": {
+    "outDir": "build",
+    "rootDir": "src"
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
+}
