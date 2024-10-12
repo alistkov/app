@@ -1,5 +1,7 @@
+import { Title } from "@repo/ui/title";
+
 export default function Home() {
   return (
-    <h1>Next app</h1>
+    <Title>Next app</Title>
   );
 }
