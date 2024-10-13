@@ -1,7 +1,9 @@
 import fastify, { FastifyInstance } from 'fastify'
 
 import cors from '@fastify/cors'
+import rateLimit from '@fastify/rate-limit'
 import Autoload from '@fastify/autoload'
+
 import { TypeBoxTypeProvider } from '@fastify/type-provider-typebox'
 
 import { fileURLToPath } from 'node:url'
@@ -17,6 +19,8 @@ const server: FastifyInstance = fastify({
 server.register(Autoload, {
   dir: join(__dirname, 'routes')
 })
+
+await server.register(rateLimit, {})
 
 await server.register(cors, {})
 
