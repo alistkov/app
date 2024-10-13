@@ -1,24 +1,26 @@
-import Fastify, { FastifyInstance } from 'fastify'
+import fastify, { FastifyInstance } from 'fastify'
+import Autoload from '@fastify/autoload'
+import { TypeBoxTypeProvider } from '@fastify/type-provider-typebox'
+
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
-import Autoload from '@fastify/autoload'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-const index: FastifyInstance = Fastify({
+const server: FastifyInstance = fastify({
   logger: true
-})
+}).withTypeProvider<TypeBoxTypeProvider>()
 
-index.register(Autoload, {
+server.register(Autoload, {
   dir: join(__dirname, 'routes')
 })
 
 const start = async () => {
   try {
-    await index.listen({ port: 4040 })
+    await server.listen({ port: 4040 })
   } catch (err) {
-    index.log.error(err)
+    server.log.error(err)
     process.exit(1)
   }
 }
