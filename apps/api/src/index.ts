@@ -1,4 +1,6 @@
 import fastify, { FastifyInstance } from 'fastify'
+
+import cors from '@fastify/cors'
 import Autoload from '@fastify/autoload'
 import { TypeBoxTypeProvider } from '@fastify/type-provider-typebox'
 
@@ -15,6 +17,8 @@ const server: FastifyInstance = fastify({
 server.register(Autoload, {
   dir: join(__dirname, 'routes')
 })
+
+await server.register(cors, {})
 
 const start = async () => {
   try {
